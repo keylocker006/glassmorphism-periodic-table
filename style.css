@@ -1,0 +1,308 @@
+/* Remove default browser spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Dark gradient background fills the viewport */
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    overflow-x: auto;
+    position: relative;
+}
+/* Decorative shapes that give the blur something to refract */
+body::before {
+    content: '';
+    position: fixed;
+    top: -150px;
+    left: -150px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(106, 17, 203, 0.4), transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px;
+    right: -100px;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(0, 182, 188, 0.3), transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Page heading with a subtle glow */
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+}
+/* Wrapper allows horizontal scroll on small screens */
+.table-container {
+    overflow-x: auto;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 18-column grid matching the periodic table structure */
+.periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, 100px);
+    grid-template-rows: repeat(10, 120px);
+    gap: 4px;
+    width: fit-content;
+    margin: 0 auto;
+}
+/* Each element tile uses flexbox to stack content vertically */
+.element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 4px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    position: relative;
+}
+/* Hover: lift the tile and brighten the glass */
+.element:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    z-index: 10;
+}
+/* Atomic number in the top-left corner */
+.element .atomic-number {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    align-self: flex-start;
+    margin-left: 4px;
+}
+
+/* Element symbol is the visual anchor */
+.element .symbol {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+/* Element name sits below the symbol */
+.element .name {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Atomic mass in subtle text */
+.element .mass {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Electron configuration at the smallest size */
+.element .electron-config {
+    font-size: 7px;
+    color: rgba(255, 255, 255, 0.55);
+    text-align: center;
+    margin-top: 2px;
+    word-break: break-all;
+}
+/* Category-specific tinted glass backgrounds */
+.element.diatomic-nonmetal {
+    background: rgba(0, 182, 188, 0.15);
+    border-color: rgba(0, 182, 188, 0.4);
+}
+
+.element.noble-gas {
+    background: rgba(206, 7, 173, 0.15);
+    border-color: rgba(206, 7, 173, 0.4);
+}
+
+.element.alkali-metal {
+    background: rgba(255, 80, 80, 0.15);
+    border-color: rgba(255, 80, 80, 0.4);
+}
+
+.element.alkaline-earth-metal {
+    background: rgba(255, 170, 0, 0.15);
+    border-color: rgba(255, 170, 0, 0.4);
+}
+
+.element.metalloid {
+    background: rgba(255, 165, 0, 0.15);
+    border-color: rgba(255, 165, 0, 0.4);
+}
+
+.element.polyatomic-nonmetal {
+    background: rgba(0, 150, 160, 0.15);
+    border-color: rgba(0, 150, 160, 0.4);
+}
+
+.element.post-transition-metal {
+    background: rgba(245, 57, 81, 0.15);
+    border-color: rgba(245, 57, 81, 0.4);
+}
+
+.element.transition-metal {
+    background: rgba(79, 187, 98, 0.15);
+    border-color: rgba(79, 187, 98, 0.4);
+}
+
+.element.lanthanide {
+    background: rgba(100, 149, 237, 0.15);
+    border-color: rgba(100, 149, 237, 0.4);
+}
+
+.element.actinide {
+    background: rgba(150, 111, 214, 0.15);
+    border-color: rgba(150, 111, 214, 0.4);
+}
+
+.element.unknown {
+    background: rgba(180, 180, 180, 0.1);
+    border-color: rgba(180, 180, 180, 0.3);
+}
+
+/* Legend container with glassmorphism */
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Each legend entry: color swatch + label side by side */
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Small colored square representing the category */
+.legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #ffffff;
+}
+
+.modal-content h2 {
+    color: #ffffff;
+    margin-bottom: 4px;
+    font-size: 1.5rem;
+}
+
+.modal-content .modal-symbol {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.modal-content .modal-detail {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.modal-content .modal-detail span {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.modal-content .modal-summary {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 12px;
+}
